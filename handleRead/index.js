@@ -6,11 +6,11 @@ const peoplesSchema = new dynamoose.Schema({
     phone: String,
 });
 
-const peoplesModel = dynamoose.model('Peoples Model', peoplesSchema);
+const peoplesModel = dynamoose.model('peoples', peoplesSchema);
 
 exports.handler = async (event) => {
     
-    console.log('---------', event.queryStringParameters);
+    // console.log('---------', event.queryStringParameters);
     const response = {statusCode: null, body: null};
 
     try {
