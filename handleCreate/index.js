@@ -1,3 +1,4 @@
+'use strict';
 const dynamoose = require('dynamoose');
 
 const peoplesSchema = new dynamoose.Schema({
