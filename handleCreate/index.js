@@ -15,6 +15,7 @@ exports.handler = async (event) => {
     let parsedBody = JSON.parse(event.body);
     let { id, name, phone} = parsedBody;
     let peoples = {id, name, phone}
+    
     const response = {statusCode: null, body: null};
 
     try {

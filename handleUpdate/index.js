@@ -11,11 +11,13 @@ const peoplesModel = dynamoose.model('peoples', peoplesSchema);
 
 exports.handler = async (event) => {
 
-  let id = event?.pathParameters?.id;
+  let parsedBody = JSON.parse(event.body);
+  let { id, name, phone} = parsedBody;
+  let peoples = {id, name, phone}
   const response = {statusCode: null, body: null};
 
   try {
-    let updatedItem = await peoplesModel.update(id);
+    let updatedItem = await peoplesModel.update(peoples);
     response.statusCode = 200;
     response.body = JSON.stringify({message: 'success', itemUpdated: updatedItem});
 
