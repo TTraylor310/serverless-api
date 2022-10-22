@@ -9,14 +9,21 @@ const peoplesSchema = new dynamoose.Schema({
 const peoplesModel = dynamoose.model('peoples', peoplesSchema);
 
 exports.handler = async (event) => {
-
+    
+    let id = event?.pathParameters?.id;
     const response = {statusCode: null, body: null};
 
     try {
-        let peoplesRecords = await peoplesModel.scan().exec();
+        let peoplesRecords;
+        if (event.pathParameters && id) {
+            peoplesRecords = await peoplesModel.get(id);
+            response.statusCode = 200;
+            response.body = JSON.stringify(peoplesRecords);
+        } else {
+        peoplesRecords = await peoplesModel.scan().exec();
         response.statusCode = 200;
         response.body = JSON.stringify(peoplesRecords);
-
+        }
     } catch (e) {
         console.log(e);
         response.statusCode = 500;
